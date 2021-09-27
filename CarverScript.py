@@ -37,3 +37,17 @@ for match in re.finditer(re.escape(headerPNG),contents):
 
 for match in re.finditer(re.escape(footerPNG),contents):
     endPosPNG.append(match.start())
+
+for i, pos in enumerate(startPosJPEG):
+    print(f"JPEG {i} found, writing to JPEG_Image_{i}.jpg")
+    pic = contents[pos:endPosJPEG[i]+2]
+    filename = "JPEG_Image_" + str(i) + ".jpg"
+    picFile = open(filename, 'wb')
+    picFile.write(pic)
+
+for i, pos in enumerate(startPosPNG):
+    print(f"PNG {i} found, writing to PNG_Image_{i}.png")
+    pic = contents[pos:endPosPNG[i]+9]
+    filename = "PNG_Image_" + str(i) + ".png"
+    picFile = open(filename, 'wb')
+    picFile.write(pic)
